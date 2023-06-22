@@ -5,7 +5,7 @@ import { CreateWantedPosterInput } from "../shared/types/models";
 
 const createWantedPosterController = async (req: Request, res: Response) => {
   const { description, phone, title }: CreateWantedPosterInput = req.body;
-  const user = await UserModel.findById({ _id: req.body.wantedPoster });
+  const user = await UserModel.findById({ _id: req.body.user });
   const createWantedPoster =
     await wantedPosterService.createWantedPosterService({
       description,
@@ -18,4 +18,12 @@ const createWantedPosterController = async (req: Request, res: Response) => {
   return res.status(200).json({ wantedPoster: createWantedPoster });
 };
 
-export { createWantedPosterController };
+const getWantedPosterController = async (req: any, res: Response) => {
+  const wantedPosters = await wantedPosterService.getAllWantedPosterService(
+    req?.user?.id,
+    "user"
+  );
+  return res.status(200).json({ wantedPosters });
+};
+
+export { createWantedPosterController, getWantedPosterController };

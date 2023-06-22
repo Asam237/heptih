@@ -30,3 +30,10 @@ export type ItemType = {
   title: string;
   description: string;
 };
+
+export type WantedPosterType = {
+  title: string;
+  description: string;
+  phone: string;
+  user?: string;
+};

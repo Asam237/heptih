@@ -36,8 +36,8 @@ export const Header = () => {
                     <h4 className={`text-xl text-white font-semibold uppercase ml-2 tracking-widest ${acme.className}`}>Heptih</h4>
                 </Link>
                 {token ?
-                    userType === "NORMAL" ?
-                        < div className="flex justify-center items-center underline underline-offset-4">
+                    userType === "METIER" ?
+                        < div className="flex justify-center items-center">
                             <DropdownMenu>
                                 <DropdownMenuTrigger className="outline-none">
                                     <div className="flex flex-row text-primary font-bold items-center text-base text-white">
@@ -60,6 +60,11 @@ export const Header = () => {
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
                             </DropdownMenu>
+                            <div className="flex justify-center items-center border text-base px-6 py-3 rounded-full border-white ml-4 hover:scale-110 duration-300 ease-in-out text-white">
+                                <Link href={'/dashboard'} className="font-semibold text-base">
+                                    Dashboard
+                                </Link>
+                            </div>
                         </div> :
                         < div className="flex justify-center items-center">
                             <DropdownMenu>
@@ -83,6 +88,11 @@ export const Header = () => {
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
                             </DropdownMenu>
+                            <div className="flex justify-center items-center border text-base px-6 py-3 rounded-full border-white ml-4 hover:scale-110 duration-300 ease-in-out text-white">
+                                <Link href={'/dashboard'} className="font-semibold text-base">
+                                    Dashboard
+                                </Link>
+                            </div>
                             <div className="flex justify-center items-center border text-base px-6 py-3 rounded-full border-white ml-4 hover:scale-110 duration-300 ease-in-out text-white">
                                 <Link href={'/administration'} className="font-semibold text-base">
                                     Administration
