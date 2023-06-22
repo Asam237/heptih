@@ -37,7 +37,7 @@ export default function Signal() {
                 queryKey: ["wantedposter"]
             })
             setProgress(false)
-            router.push("/dashboard")
+            router.push("/lost")
         }
     })
 

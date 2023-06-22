@@ -13,6 +13,10 @@ const wantedPosterSchema: mongoose.Schema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  find: {
+    type: Boolean,
+    default: false,
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -20,6 +24,11 @@ const wantedPosterSchema: mongoose.Schema = new mongoose.Schema({
 });
 
 const WantedPosterModel = mongoose.model("WantedPoster", wantedPosterSchema);
-const WantedPosterUpdateParams: string[] = ["title", "description", "phone"];
+const WantedPosterUpdateParams: string[] = [
+  "title",
+  "description",
+  "phone",
+  "find",
+];
 
 export { WantedPosterModel, WantedPosterUpdateParams };

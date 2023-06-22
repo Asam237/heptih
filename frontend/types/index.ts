@@ -35,5 +35,6 @@ export type WantedPosterType = {
   title: string;
   description: string;
   phone: string;
+  find: boolean;
   user?: string;
 };

@@ -1,16 +1,19 @@
 import { Request, Response } from "express";
 import { UserModel } from "../domain/models/user.model";
+import { WantedPosterUpdateParams } from "../domain/models/wantedPoster.model";
 import wantedPosterService from "../domain/services/wantedPoster.service";
 import { CreateWantedPosterInput } from "../shared/types/models";
+import { parseRequest } from "../utils/helpers";
 
 const createWantedPosterController = async (req: Request, res: Response) => {
-  const { description, phone, title }: CreateWantedPosterInput = req.body;
+  const { description, phone, title, find }: CreateWantedPosterInput = req.body;
   const user = await UserModel.findById({ _id: req.body.user });
   const createWantedPoster =
     await wantedPosterService.createWantedPosterService({
       description,
       phone,
       title,
+      find,
       user,
     });
   await user?.save();
@@ -30,8 +33,19 @@ const findWantedPosterController = async (req: Request, res: Response) => {
   return res.status(200).json({ wantedPosters });
 };
 
+const updateWantedPosterController = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const data = parseRequest(req.body, WantedPosterUpdateParams);
+  const updateWanted = await wantedPosterService.updateWantedPosterService(
+    id,
+    data
+  );
+  return res.json(updateWanted);
+};
+
 export {
   createWantedPosterController,
   getWantedPosterController,
   findWantedPosterController,
+  updateWantedPosterController,
 };

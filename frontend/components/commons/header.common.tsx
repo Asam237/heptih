@@ -61,7 +61,7 @@ export const Header = () => {
                                 </DropdownMenuContent>
                             </DropdownMenu>
                             <div className="flex justify-center items-center border text-base px-6 py-3 rounded-full border-white ml-4 hover:scale-110 duration-300 ease-in-out text-white">
-                                <Link href={'/dashboard'} className="font-semibold text-base">
+                                <Link href={'/lost'} className="font-semibold text-base">
                                     Dashboard
                                 </Link>
                             </div>
@@ -89,7 +89,7 @@ export const Header = () => {
                                 </DropdownMenuContent>
                             </DropdownMenu>
                             <div className="flex justify-center items-center border text-base px-6 py-3 rounded-full border-white ml-4 hover:scale-110 duration-300 ease-in-out text-white">
-                                <Link href={'/dashboard'} className="font-semibold text-base">
+                                <Link href={'/lost'} className="font-semibold text-base">
                                     Dashboard
                                 </Link>
                             </div>

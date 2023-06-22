@@ -42,7 +42,7 @@ export default function Login() {
             })
             setProgress(false)
             await myauth(data)
-            router.push("/dashboard")
+            router.push("/lost")
         }
     })
     const handlerAuth = async (e: any) => {

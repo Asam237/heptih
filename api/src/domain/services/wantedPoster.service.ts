@@ -21,10 +21,18 @@ const findWantedPosterService = async () => {
   return await WantedPosterModel.find();
 };
 
+const updateWantedPosterService = async (id: any, data: any) => {
+  if (data !== null) {
+    await WantedPosterModel.findOneAndUpdate({ _id: id }, data);
+  }
+  return await WantedPosterModel.findOne({ _id: id });
+};
+
 export default {
   createWantedPosterService,
   deleteWantedPosterService,
   getOneWantedPosterService,
   getAllWantedPosterService,
   findWantedPosterService,
+  updateWantedPosterService,
 };

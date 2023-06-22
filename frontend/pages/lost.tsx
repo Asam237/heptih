@@ -3,7 +3,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query"
 import Link from "next/link"
 import { useCookies } from "react-cookie"
 import { AiFillAlert, AiFillHome, AiFillPhone, AiFillShop } from "react-icons/ai"
-import { BiHelpCircle, BiSignal1, BiSignal2, BiSignal3 } from "react-icons/bi"
+import { BiCheck, BiHelpCircle, BiNoEntry, BiSignal1, BiSignal2, BiSignal3, BiWon } from "react-icons/bi"
 import { BsShop } from "react-icons/bs"
 import { Footer } from "../components/commons/footer.common"
 import { Header } from "../components/commons/header.common"
@@ -13,7 +13,7 @@ import { findAllWantedPoster, getAllWantedPoster } from "./api"
 
 const poppins = Poppins({ weight: "400", subsets: ['latin'] })
 const bigShoulders = Roboto({ weight: "900", subsets: ['latin'] })
-export default function Dashboard() {
+export default function Lost() {
 
     const queryClient = useQueryClient()
     const [cookie, removeCookie]: any = useCookies(["qwer"])
@@ -25,6 +25,8 @@ export default function Dashboard() {
 
     const wantedposter = data?.wantedPosters || []
 
+    console.log("data ==============>", wantedposter)
+
     return (
         <div className={`${poppins.className}`}>
             <div className='bg-blue-900'>
@@ -35,23 +37,25 @@ export default function Dashboard() {
             <main>
                 <div className="container mx-auto">
                     <section className='flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-10 w-full mt-8 lg:mt-16 lg:w-3/5 lg:justify-center lg:items-center mx-auto'>
-                        <Link href={"/dashboard"} className={`w-full flex justify-center items-center text-xs lg:text-sm px-8 py-3 lg:py-5 tracking-[0.07em] border border-blue-900 bg-white text-blue-900 ${bigShoulders.className} rounded-full uppercase hover:scale-110 duration-300 ease-in-out my-auto`}><AiFillHome className="text-3xl mr-4 text-blue-900" /> Accueil</Link>
+                        <Link href={"/lost"} className={`w-full flex justify-center items-center text-xs lg:text-sm px-8 py-3 lg:py-5 tracking-[0.07em] border border-blue-900 bg-white text-blue-900 ${bigShoulders.className} rounded-full uppercase hover:scale-110 duration-300 ease-in-out my-auto`}><BiNoEntry className="text-3xl mr-4 text-blue-900" /> Perdus</Link>
+                        <Link href={"/find"} className={`w-full flex justify-center items-center text-xs lg:text-sm px-8 py-3 lg:py-5 tracking-[0.07em] border border-blue-900 bg-white text-blue-900 ${bigShoulders.className} rounded-full uppercase hover:scale-110 duration-300 ease-in-out my-auto`}><BiCheck className="text-3xl mr-4 text-blue-900" /> Trouves</Link>
                         <Link href={"/objets"} className={`w-full flex justify-center items-center text-xs lg:text-sm px-8 py-3 lg:py-5 tracking-[0.07em] border border-blue-900 bg-white text-blue-900 ${bigShoulders.className} rounded-full uppercase hover:scale-110 duration-300 ease-in-out my-auto`}><AiFillShop className="text-3xl mr-4 text-blue-900" /> Mes objets</Link>
-                        <Link href={"aides"} className={`w-full flex justify-center items-center text-xs lg:text-sm px-8 py-3 lg:py-5 tracking-[0.07em] border border-blue-900 bg-white text-blue-900 ${bigShoulders.className} rounded-full uppercase hover:scale-110 duration-300 ease-in-out my-auto`}><BiHelpCircle className="text-3xl mr-4 text-blue-900" /> Aide</Link>
                     </section>
                     <section className="py-14">
                         {
                             wantedposter?.length > 0 ? <div className="grid gap-4 grid-cols-1 lg:grid-cols-3">
                                 {
                                     wantedposter?.map((item: WantedPosterType, index: any) => {
-                                        return (
-                                            <div key={index} className="border px-4 py-8 rounded-md">
-                                                <h4 className={`text-xl lg:text-2xl lg:leading-relaxed text-blue-900 lg:tracking-[0.05em] ${bigShoulders.className}`}>{item.title}</h4>
-                                                <p className="pt-2 text-base text-gray-700">{item.description}</p>
-                                                <p className="pt-4 text-base text-gray-700 flex items-center"><AiFillPhone className="text-xl" />{item.phone}</p>
-                                                <button className={`w-full flex text-sm justify-center mt-6 items-center px-8 py-3 tracking-[0.07em] border bg-blue-900 text-white ${bigShoulders.className} rounded-full w-3/4 mx-auto hover:scale-110 duration-300 ease-in-out my-auto`}><BsShop className="text-2xl mr-4 text-white" />Objet retrouve</button>
-                                            </div>
-                                        )
+                                        if (item?.find === false) {
+                                            return (
+                                                <div key={index} className="border px-4 py-8 rounded-md">
+                                                    <h4 className={`text-xl lg:text-2xl lg:leading-relaxed text-blue-900 lg:tracking-[0.05em] ${bigShoulders.className}`}>{item.title}</h4>
+                                                    <p className="pt-2 text-base text-gray-700">{item.description}</p>
+                                                    <p className="pt-4 text-base text-gray-700 flex items-center"><AiFillPhone className="text-xl" />{item.phone}</p>
+                                                    <button className={`w-full flex text-sm justify-center mt-6 items-center px-8 py-3 tracking-[0.07em] border bg-blue-900 text-white ${bigShoulders.className} rounded-full w-3/4 mx-auto hover:scale-110 duration-300 ease-in-out my-auto`}><BsShop className="text-2xl mr-4 text-white" />Objet retrouve</button>
+                                                </div>
+                                            )
+                                        }
                                     })
                                 }
                             </div> :
