@@ -32,6 +32,7 @@ export type ItemType = {
 };
 
 export type WantedPosterType = {
+  _id: any;
   title: string;
   description: string;
   phone: string;

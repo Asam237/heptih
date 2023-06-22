@@ -31,7 +31,7 @@ export const destroyWantedPoster = async (id: any) => {
   return await api.delete(`/wanted-poster/${id}`);
 };
 
-export const updateWantedPoster = async (id: any, data: any) => {
+export const updateWantedPoster = async (id: any, data?: any) => {
   return await api.put(`/wanted-poster/${id}`, data);
 };
 
