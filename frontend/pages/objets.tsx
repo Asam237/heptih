@@ -8,23 +8,20 @@ import { BsShop } from "react-icons/bs"
 import { Footer } from "../components/commons/footer.common"
 import { Header } from "../components/commons/header.common"
 import { WantedPosterType } from "../types"
-import { findAllWantedPoster, getAllWantedPoster } from "./api"
+import { getAllWantedPoster } from "./api"
 
 
 const poppins = Poppins({ weight: "400", subsets: ['latin'] })
 const bigShoulders = Roboto({ weight: "900", subsets: ['latin'] })
-export default function Dashboard() {
-
+export default function Objet() {
     const queryClient = useQueryClient()
     const [cookie, removeCookie]: any = useCookies(["qwer"])
     const token = cookie?.qwer?.token
     const { isLoading, error, data } = useQuery({
         queryKey: ["wantedposter"],
-        queryFn: () => findAllWantedPoster(token)
+        queryFn: () => getAllWantedPoster(token)
     })
-
     const wantedposter = data?.wantedPosters || []
-
     return (
         <div className={`${poppins.className}`}>
             <div className='bg-blue-900'>
@@ -72,5 +69,7 @@ export default function Dashboard() {
             </main>
             <Footer />
         </div >
+
     )
+
 }
