@@ -11,6 +11,11 @@ const WantedPosterRoute = () => {
     verifyToken,
     wantedPosterController.getWantedPosterController
   );
+  router.get(
+    `${prefix}/all`,
+    verifyToken,
+    wantedPosterController.findWantedPosterController
+  );
   return router;
 };
 

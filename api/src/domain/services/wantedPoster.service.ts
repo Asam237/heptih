@@ -17,9 +17,14 @@ const getAllWantedPosterService = async (_id: any, populate: any) => {
   return await WantedPosterModel.find({ user: _id }).populate(populate);
 };
 
+const findWantedPosterService = async () => {
+  return await WantedPosterModel.find();
+};
+
 export default {
   createWantedPosterService,
   deleteWantedPosterService,
   getOneWantedPosterService,
   getAllWantedPosterService,
+  findWantedPosterService,
 };

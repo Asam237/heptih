@@ -25,5 +25,13 @@ const getWantedPosterController = async (req: any, res: Response) => {
   );
   return res.status(200).json({ wantedPosters });
 };
+const findWantedPosterController = async (req: Request, res: Response) => {
+  const wantedPosters = await wantedPosterService.findWantedPosterService();
+  return res.status(200).json({ wantedPosters });
+};
 
-export { createWantedPosterController, getWantedPosterController };
+export {
+  createWantedPosterController,
+  getWantedPosterController,
+  findWantedPosterController,
+};

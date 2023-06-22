@@ -8,7 +8,7 @@ import { BsShop } from "react-icons/bs"
 import { Footer } from "../components/commons/footer.common"
 import { Header } from "../components/commons/header.common"
 import { WantedPosterType } from "../types"
-import { getAllWantedPoster } from "./api"
+import { findAllWantedPoster, getAllWantedPoster } from "./api"
 
 
 const poppins = Poppins({ weight: "400", subsets: ['latin'] })
@@ -20,7 +20,7 @@ export default function Dashboard() {
     const token = cookie?.qwer?.token
     const { isLoading, error, data } = useQuery({
         queryKey: ["wantedposter"],
-        queryFn: () => getAllWantedPoster(token)
+        queryFn: () => findAllWantedPoster(token)
     })
 
     const wantedposter = data.wantedPosters || []
