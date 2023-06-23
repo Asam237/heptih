@@ -54,7 +54,7 @@ export default function Objet() {
                                                             }
                                                         </div>
                                                         <p className="pt-2 text-base text-gray-700">{item.description}</p>
-                                                        <p className="pt-4 text-base text-gray-700 flex items-center"><AiFillPhone className="text-xl" />{item.phone}</p>
+                                                        <p className="pt-4 text-base text-gray-700 flex items-center"><AiFillPhone className="text-xl mr-3" />{item.phone}</p>
                                                     </div>
                                                 )
                                             })
