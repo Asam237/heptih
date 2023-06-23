@@ -6,7 +6,8 @@ import { CreateWantedPosterInput } from "../shared/types/models";
 import { parseRequest } from "../utils/helpers";
 
 const createWantedPosterController = async (req: Request, res: Response) => {
-  const { description, phone, title, find }: CreateWantedPosterInput = req.body;
+  const { description, phone, title, find, date }: CreateWantedPosterInput =
+    req.body;
   const user = await UserModel.findById({ _id: req.body.user });
   const createWantedPoster =
     await wantedPosterService.createWantedPosterService({
@@ -15,6 +16,7 @@ const createWantedPosterController = async (req: Request, res: Response) => {
       title,
       find,
       user,
+      date,
     });
   await user?.save();
   await createWantedPoster.save();

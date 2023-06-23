@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { useCookies } from "react-cookie"
-import { AiFillAlert, AiFillHome, AiFillPhone, AiFillShop } from "react-icons/ai"
+import { AiFillAlert, AiFillHome, AiFillPhone, AiFillShop, AiOutlineFieldTime } from "react-icons/ai"
 import { BiCheck, BiHelpCircle, BiNoEntry, BiSignal1, BiSignal2, BiSignal3, BiWon } from "react-icons/bi"
 import { BsShop } from "react-icons/bs"
 import { Footer } from "../components/commons/footer.common"
@@ -38,9 +38,10 @@ export default function Lost() {
     const handleFind = async (e: any) => {
         e.preventDefault()
         let find = true
-        const mywanted = await updateWantedPoster(myId, { find })
+        let date = Date.now()
+        const mywanted = await updateWantedPoster(myId, { find, date })
         if (mywanted.status === 200) {
-            await updateWantedPoster(myId, { find })
+            await updateWantedPoster(myId, { find, date })
             router.push("/find")
         }
 
@@ -59,22 +60,24 @@ export default function Lost() {
                     <section className='flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-10 w-full mt-8 lg:mt-16 lg:w-3/5 lg:justify-center lg:items-center mx-auto'>
                         <Link href={"/lost"} className={`w-full flex justify-center items-center text-xs lg:text-sm px-8 py-3 lg:py-5 tracking-[0.07em] border  ${bigShoulders.className} ${window.location.pathname === "/lost" ? 'bg-blue-900 text-white' : 'border-blue-900 bg-white text-blue-900'} rounded-full uppercase hover:scale-110 duration-300 ease-in-out my-auto`}><BiNoEntry className="text-3xl mr-4" /> Perdus</Link>
                         <Link href={"/find"} className={`w-full flex justify-center items-center text-xs lg:text-sm px-8 py-3 lg:py-5 tracking-[0.07em] border ${bigShoulders.className} ${window.location.pathname === "/find" ? 'bg-blue-900 text-white' : 'border-blue-900 bg-white text-blue-900'} rounded-full uppercase hover:scale-110 duration-300 ease-in-out my-auto`}><BiCheck className="text-3xl mr-4" /> Trouves</Link>
-                        <Link href={"/objets"} className={`w-full flex justify-center items-center text-xs lg:text-sm px-8 py-3 lg:py-5 tracking-[0.07em] border ${bigShoulders.className} ${window.location.pathname === "/objets" ? 'bg-blue-900 text-white' : 'border-blue-900 bg-white text-blue-900'} rounded-full uppercase hover:scale-110 duration-300 ease-in-out my-auto`}><BiCheck className="text-3xl mr-4" /> Mes objets</Link>
+                        <Link href={"/objets"} className={`w-full flex justify-center items-center text-xs lg:text-sm px-8 py-3 lg:py-5 tracking-[0.07em] border ${bigShoulders.className} ${window.location.pathname === "/objets" ? 'bg-blue-900 text-white' : 'border-blue-900 bg-white text-blue-900'} rounded-full uppercase hover:scale-110 duration-300 ease-in-out my-auto`}><BsShop className="text-3xl mr-4" /> Mes objets</Link>
                     </section>
-                    <div className={`mt-6 text-xs  lg:w-3/5 mx-auto lg:mt-12 flex-col justify-center items-center ${wantedposter?.length > 0 ? 'hidden' : 'flex'} `}>
-                        <Link href={"/signal"} className={`w-full flex text-xs justify-center lg:text-base items-center py-2 bg-blue-900 text-white tracking-[0.07em] border ${bigShoulders.className} rounded-full hover:scale-110 duration-300 ease-in-out my-auto`}><AiFillAlert className="text-3xl mr-4 text-white" />Signaler un objet</Link>
+                    <div className={`mt-3 text-xs  lg:w-3/5 mx-auto lg:mt-12 flex-col justify-center items-center flex`}>
+                        <Link href={"/signal"} className={`w-full flex text-xs justify-center items-center py-2 border-blue-900 text-blue-900 tracking-[0.07em] border ${bigShoulders.className} rounded-full hover:scale-110 duration-300 ease-in-out my-auto`}><AiFillAlert className="text-3xl mr-4 text-blue-900" />Signaler un objet</Link>
                     </div>
                     <section className="py-14">
                         {
                             wantedposter?.length > 0 ? <div className="grid gap-4 grid-cols-1 lg:grid-cols-3">
                                 {
                                     wantedposter?.map((item: WantedPosterType, index: any) => {
+
                                         if (item?.find === false) {
                                             return (
                                                 <div key={index} className="border px-4 py-8 rounded-md">
                                                     <h4 className={`text-xl lg:text-2xl lg:leading-relaxed text-blue-900 lg:tracking-[0.05em] ${bigShoulders.className}`}>{item.title}</h4>
                                                     <p className="pt-2 text-base text-gray-700">{item.description}</p>
                                                     <p className="pt-4 text-base text-gray-700 flex items-center"><AiFillPhone className="text-xl" />{item.phone}</p>
+                                                    <p className="pt-4 text-base text-gray-700 flex items-center"><AiOutlineFieldTime className="text-xl mr-3" />{new Date(item.date).toLocaleDateString()}</p>
                                                     <button onClick={() => {
                                                         setMyId(item?._id)
                                                         setFindObjet(true)
