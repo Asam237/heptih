@@ -1,12 +1,14 @@
 import { Poppins, Roboto } from "@next/font/google"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import Link from "next/link"
+import { useState } from "react"
 import { useCookies } from "react-cookie"
 import { AiFillAlert, AiFillHome, AiFillPhone, AiFillShop, AiOutlineFieldTime } from "react-icons/ai"
 import { BiCheck, BiHelpCircle, BiNoEntry, BiSignal1, BiSignal2, BiSignal3, BiWon } from "react-icons/bi"
-import { BsCheck, BsCheck2, BsCheck2Circle, BsShop } from "react-icons/bs"
+import { BsCheck, BsCheck2, BsCheck2Circle, BsInfo, BsInfoCircle, BsShop } from "react-icons/bs"
 import { Footer } from "../components/commons/footer.common"
 import { Header } from "../components/commons/header.common"
+import { Modal } from "../components/commons/modal.common"
 import { WantedPosterType } from "../types"
 import { findAllWantedPoster, getAllWantedPoster } from "./api"
 
@@ -17,6 +19,9 @@ export default function Find() {
 
     const queryClient = useQueryClient()
     const [cookie, removeCookie]: any = useCookies(["qwer"])
+    const [commentaireModal, setCommentaireModal] = useState(false)
+    const [commentaireO, setCommentaireO]: any = useState("")
+    const [city, setCity]: any = useState("")
     const token = cookie?.qwer?.token
     const { isLoading, error, data } = useQuery({
         queryKey: ["wantedposter"],
@@ -49,7 +54,11 @@ export default function Find() {
                                                 <div key={index} className="border px-4 py-8 rounded-md">
                                                     <div className="flex justify-between items-center">
                                                         <h4 className={`text-xl lg:text-2xl lg:leading-relaxed text-blue-900 lg:tracking-[0.05em] ${bigShoulders.className}`}>{item.title}</h4>
-                                                        <BsCheck2Circle className="text-green-500 text-2xl" />
+                                                        <BsInfoCircle onClick={() => {
+                                                            setCommentaireO(item.commentaire)
+                                                            setCity(item.city)
+                                                            setCommentaireModal(true)
+                                                        }} className="text-blue-900 text-2xl cursor-pointer" />
                                                     </div>
                                                     <p className="pt-2 text-base text-gray-700">{item.description}</p>
                                                     <p className="pt-4 text-base text-gray-700 flex items-center underline underline-offset-4"><AiFillPhone className="text-xl mr-3" />{item.phone}</p>
@@ -76,6 +85,32 @@ export default function Find() {
                 </div>
             </main>
             <Footer />
+
+
+
+            {
+                commentaireModal && (
+                    <Modal
+                        onClose={() => setCommentaireModal(false)}
+                        title="Information sur l'objet retrouve"
+                    >
+                        <div>
+                            <p className='text-base py-1 text-gray-700'>Adresse: <span className="font-bold underline underline-offset-4 ml-3">{commentaireO}</span></p>
+                            <p className='text-base py-1 text-gray-700'>Ville: <span className="font-bold underline underline-offset-4 ml-3">{city}</span></p>
+                        </div>
+                        <div className="flex flex-row space-x-4 items-center justify-end my-6">
+                            <button onClick={async (e: any) => {
+                                await setCommentaireModal(false)
+
+                            }} className="bg-blue-900 px-4 py-2 w-28 rounded-lg text-white flex justify-center items-center">
+
+                                Valider
+                            </button>
+                        </div>
+                    </Modal>
+
+                )
+            }
         </div >
     )
 }

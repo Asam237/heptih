@@ -16,5 +16,7 @@ export type CreateWantedPosterInput = {
   phone: string;
   find: boolean;
   user: any;
+  commentaire: string;
+  city: string;
   date: any;
 };

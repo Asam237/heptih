@@ -24,6 +24,8 @@ export default function Lost() {
     const token = cookie?.qwer?.token
     const [findObjet, setFindObjet] = useState(false)
     const [myId, setMyId] = useState("")
+    const [commentaire, setConmmentaire] = useState("")
+    const [city, setCity] = useState("")
     const { isLoading, error, data } = useQuery({
         queryKey: ["wantedposter"],
         queryFn: () => findAllWantedPoster(token)
@@ -39,7 +41,7 @@ export default function Lost() {
         e.preventDefault()
         let find = true
         let date = Date.now()
-        const mywanted = await updateWantedPoster(myId, { find, date })
+        const mywanted = await updateWantedPoster(myId, { find, date, commentaire, city })
         if (mywanted.status === 200) {
             await updateWantedPoster(myId, { find, date })
             router.push("/find")
@@ -76,7 +78,7 @@ export default function Lost() {
                                                 <div key={index} className="border px-4 py-8 rounded-md">
                                                     <h4 className={`text-xl lg:text-2xl lg:leading-relaxed text-blue-900 lg:tracking-[0.05em] ${bigShoulders.className}`}>{item.title}</h4>
                                                     <p className="pt-2 text-base text-gray-700">{item.description}</p>
-                                                    <p className="pt-4 text-base text-gray-700 flex items-center"><AiFillPhone className="text-xl" />{item.phone}</p>
+                                                    <p className="pt-4 text-base text-gray-700 flex items-center"><AiFillPhone className="text-xl mr-3" />{item.phone}</p>
                                                     <p className="pt-4 text-base text-gray-700 flex items-center"><AiOutlineFieldTime className="text-xl mr-3" />{new Date(item.date).toLocaleDateString()}</p>
                                                     <button onClick={() => {
                                                         setMyId(item?._id)
@@ -108,13 +110,21 @@ export default function Lost() {
                 findObjet && (
                     <Modal
                         onClose={() => setFindObjet(false)}
-                        title="Status Objet"
+                        title="Cet objet a t-il ete retrouve ?"
                     >
-                        <p>Cet Objet a t-il ete retrouve ?</p>
+                        <p className='text-base py-2'>Veuillez remplir les Informations de celui qui a retrouve l'objet</p>
+                        <div>
+                            <p className='text-base py-1'>Telephone/Email</p>
+                            <input onChange={(e) => setConmmentaire(e.target.value)} className='p-2 rounded-md bg-white border border-gray-400 w-full' />
+                        </div>
+                        <div className="mt-4">
+                            <p className='text-base py-1'>Ville</p>
+                            <input onChange={(e) => setCity(e.target.value)} className='p-2 rounded-md bg-white border border-gray-400 w-full' />
+                        </div>
                         <div className="flex flex-row space-x-4 items-center justify-end my-6">
                             <div className="flex justify-center items-center border px-4 py-2 rounded-md border-black w-28">
                                 <button onClick={handleCancel} className="font-semibold text-sm">
-                                    NON
+                                    Annuler
                                 </button>
                             </div>
                             <button onClick={async (e: any) => {
@@ -123,7 +133,7 @@ export default function Lost() {
 
                             }} className="bg-blue-900 px-4 py-2 w-28 rounded-lg text-white flex justify-center items-center">
 
-                                OUI
+                                Retrouver
                             </button>
                         </div>
                     </Modal>

@@ -38,5 +38,7 @@ export type WantedPosterType = {
   phone: string;
   find: boolean;
   user?: string;
-  date?: any
+  date?: any;
+  commentaire?: string;
+  city?: string;
 };

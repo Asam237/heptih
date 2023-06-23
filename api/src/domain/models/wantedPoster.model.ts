@@ -21,6 +21,14 @@ const wantedPosterSchema: mongoose.Schema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  commentaire: {
+    type: String,
+    default: "",
+  },
+  city: {
+    type: String,
+    default: "",
+  },
   date: {
     type: Date,
     default: Date.now(),
@@ -34,6 +42,8 @@ const WantedPosterUpdateParams: string[] = [
   "phone",
   "find",
   "date",
+  "commentaire",
+  "city",
 ];
 
 export { WantedPosterModel, WantedPosterUpdateParams };
