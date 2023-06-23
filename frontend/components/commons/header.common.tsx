@@ -37,7 +37,7 @@ export const Header = () => {
                 </Link>
                 {token ?
                     userType === "METIER" ?
-                        < div className="flex justify-center items-center">
+                        < div className="lg:flex justify-center items-center hidden">
                             <DropdownMenu>
                                 <DropdownMenuTrigger className="outline-none">
                                     <div className="flex flex-row text-primary font-bold items-center text-base text-white">
@@ -66,7 +66,7 @@ export const Header = () => {
                                 </Link>
                             </div>
                         </div> :
-                        < div className="flex justify-center items-center">
+                        < div className="hidden lg:flex justify-center items-center">
                             <DropdownMenu>
                                 <DropdownMenuTrigger className="outline-none">
                                     <div className="flex flex-row text-primary font-bold items-center text-base text-white">

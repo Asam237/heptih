@@ -6,6 +6,7 @@ import { Item } from '../components/commons/item.common'
 import { AiFillCreditCard, AiFillTag, AiOutlineUser, } from "react-icons/ai"
 import { BiAtom, BiCloud } from "react-icons/bi"
 import { BsBook, BsSafe } from "react-icons/bs"
+import Link from 'next/link'
 const poppins = Poppins({ weight: "400", subsets: ['latin'] })
 const bigShoulders = Roboto({ weight: "900", subsets: ['latin'] })
 export default function Home() {
@@ -29,12 +30,12 @@ export default function Home() {
                 <p className='py-4 lg:py-14 text-gray-300 text-base lg:text-xl font-semibold lg:leading-relaxed'>Vous avez perdu ou trouvé un objet ? <br />
                   Déclarez-le et la communauté se mobilise pour vous aider à le retrouver.</p>
                 <div className='flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-10 w-full mt-4'>
-                  <button className={`w-full flex justify-center items-center px-8 py-5 tracking-[0.07em] bg-blue-900 ${bigShoulders.className} text-white rounded-full uppercase hover:scale-110 duration-300 ease-in-out border`}>j'ai perdu</button>
-                  <button className={`w-full flex justify-center items-center px-8 py-5 tracking-[0.07em] bg-white text-gray-900 ${bigShoulders.className} rounded-full uppercase hover:scale-110 duration-300 ease-in-out`}>j'ai trouve</button>
+                  <Link href={"/lost"} className={`w-full flex justify-center items-center px-8 py-5 tracking-[0.07em] bg-blue-900 ${bigShoulders.className} text-white rounded-full uppercase hover:scale-110 duration-300 ease-in-out border`}>j'ai perdu</Link>
+                  <Link href={"/find"} className={`w-full flex justify-center items-center px-8 py-5 tracking-[0.07em] bg-white text-gray-900 ${bigShoulders.className} rounded-full uppercase hover:scale-110 duration-300 ease-in-out`}>j'ai trouve</Link>
                 </div>
               </div>
               <div className='w-full lg:w-2/6'>
-                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -86,8 +87,8 @@ export default function Home() {
                 Signalez votre objet !
               </h1>
               <div className='flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-10 w-full mt-8 lg:mt-16 lg:w-3/5 lg:justify-center lg:items-center mx-auto'>
-                <button className={`w-full flex justify-center items-center px-8 py-5 tracking-[0.07em] bg-blue-900 ${bigShoulders.className} text-white rounded-full uppercase hover:scale-110 duration-300 ease-in-out`}>j'ai perdu</button>
-                <button className={`w-full flex justify-center items-center px-8 py-5 tracking-[0.07em] border border-gray-800 bg-white text-gray-900 ${bigShoulders.className} rounded-full uppercase hover:scale-110 duration-300 ease-in-out`}>j'ai trouve</button>
+                <Link href={"/lost"} className={`w-full flex justify-center items-center px-8 py-5 tracking-[0.07em] bg-blue-900 ${bigShoulders.className} text-white rounded-full uppercase hover:scale-110 duration-300 ease-in-out`}>j'ai perdu</Link>
+                <Link href={"/find"} className={`w-full flex justify-center items-center px-8 py-5 tracking-[0.07em] border border-gray-800 bg-white text-gray-900 ${bigShoulders.className} rounded-full uppercase hover:scale-110 duration-300 ease-in-out`}>j'ai trouve</Link>
               </div>
             </section>
           </div>
